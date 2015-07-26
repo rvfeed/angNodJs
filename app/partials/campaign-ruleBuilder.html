@@ -1,0 +1,149 @@
+<!-- Begin page content -->
+<div class="container-fluid" >
+
+    <ng-include src="'partials/navbar-common.html'"></ng-include>
+
+    <div class="row-fluid">
+        <div class="conBlock span12">
+            <h3>Visual  Rule  Builder<span ng-show='loadingFlag'>&nbsp; &nbsp; &nbsp; (Loading...)</span></h3>
+            <span ng-show='loadingFlag'>&nbsp; &nbsp; &nbsp; Load info: {{loadingStatus}} </span>
+
+            <form class="filterData" name="form">
+                <div class="row-fluid">
+                    <div class="span12 campInfo">
+                        <div class="span12">
+                            <h4>Rule for  {{campaign.name}}  ( {{campaign.startDate.toDate() | date:'MM-dd-yyyy' }} to {{campaign.endDate.toDate() | date:'MM-dd-yyyy' }} )  </h4>
+
+                            <div class="well span12 blueBorderBox">
+                                <div class="form-horizontal">
+                                    <div class="control-group">
+
+                                        <div class="controls">
+                                            <select  class="span2"  ng-model="selectedField"   ng-change="showOperators(selectedField)"
+                                                     ng-options="field as field.name for field in fields">
+                                            </select>
+
+                                            <select  class="span2"  ng-model="selectedOperator"  ng-show="showOperatorsField"
+                                                     ng-options="operator as operator.name for operator in operators">
+                                            </select>
+
+                                            <input type="text" id="campaignName" ng-show="showTextField" class="span2"   ng-model="selectedValue">
+
+                                            <div class="span4" ng-show="showDateField">
+
+                                                <!-- Campaign start date box & picker -->
+                                                <input class="span4" id="startDateText" type="text" name="startDateText"
+                                                       value="{{campaign.startDate.toDate() | date:'MM-dd-yyyy' }}"
+                                                       ng-click="showPicker('#startDate')" readonly>
+                                            <span><i class="icon-th" class="input-append date" id="startDate"
+                                                     data-date="" data-date-format="mm-dd-yyyy"></i></span>
+                                            </div>
+
+                                            <select  class="span2"  ng-model="selectedValue"  ng-show="showSingleLookUp"
+                                                     ng-options="singleLookUpValue as singleLookUpValue.statusName for singleLookUpValue in singleLookUpValues">
+                                            </select>
+
+                                            <select  class="span2"  ng-model="selectedValue"   ng-show="showMultiLookup" multiple
+                                                     ng-options="operator.value as operator.name for operator in operators">
+                                            </select>
+
+
+                                            <button type="submit" class="btn btn-primary" ng-click="addFilters()">ADD</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">Condition between fields:</label>
+                                        <div class="controls">
+
+                                            <label class="control-label">AND</label>
+                                            <input ng-model="searchBy" value="Rma" type="radio" name="search-type">
+
+
+
+                                        </div>
+                                        <div class="controls">
+
+                                            <label class="control-label">OR</label>
+                                            <input ng-model="searchBy" value="Rma" type="radio" name="search-type">
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div id="feedData">
+
+                            <h4></h4>
+
+                            <div role="grid" class="dataTables_wrapper form-inline" id="eplusGrid_wrapper">
+                                <div class="row-fluid">
+                                    <div class="span12 recPage heightAuto"></div>
+                                </div>
+                                <table cellspacing="0" cellpadding="0" border="0" id="eplusDataTable"
+                                       class="table table-striped table-bordered dataTable"
+                                       aria-describedby="example_info">
+                                    <thead>
+                                    <tr role="row-fluid">
+
+                                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="example"
+                                            rowspan="1"
+                                            colspan="1" aria-label="Browser: activate to sort column ascending">Field
+                                        </th>
+                                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="example"
+                                            rowspan="1"
+                                            colspan="1" aria-label="Platform(s): activate to sort column ascending">Operator
+                                        </th>
+                                        <th class="sorting center" role="columnheader" tabindex="0"
+                                            aria-controls="example"
+                                            rowspan="1" colspan="1"
+                                            aria-label="Engine version: activate to sort column ascending">Value
+
+                                        </th>
+                                        <th class="sorting center" role="columnheader" tabindex="0"
+                                            aria-controls="example"
+                                            rowspan="1" colspan="1"
+                                            aria-label="CSS grade: activate to sort column ascending"> Action
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <!--{{finalFilters}}-->
+                                    <tbody role="alert" aria-live="polite" aria-relevant="all">
+
+                                    <tr class="gradeA odd selected" ng-repeat="filter in finalFilters">
+
+                                        <td class="sorting_1">{{filter.field}}</td>
+                                        <td class=" ">{{filter.operator}}</td>
+                                        <td class="center ">{{filter.value}}</td>
+                                        <td class="center "><button type="submit" class="btn btn-primary" ng-click="">Cancel</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class=" span12 form-actions blueBorderBox noMarLeft">
+                        <div class="span3">
+                            <button type="submit" class="btn btn-primary" ng-click="runVisualRule()">Next</button>
+                            &nbsp;&nbsp;
+                            <button type="submit" class="btn" ng-click="backToEditPage()">Cancel</button>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+

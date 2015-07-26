@@ -1,0 +1,52 @@
+<!-- Begin page content -->
+<div class="container-fluid">
+
+    <ng-include src="'partials/navbar-common.html'"></ng-include>
+
+    <div class="row-fluid">
+        <div class="conBlock span12">
+            <h3>My Campaign Dashboard
+                <span ng-show='loadingFlag'>&nbsp; &nbsp; &nbsp; (Loading...)
+                </span>
+            </h3>
+
+            <span ng-show='loadingFlag'>&nbsp; &nbsp; &nbsp; Load info: {{loadingStatus}} </span>
+
+            <div id="campDashboard">
+                <span>&nbsp; &nbsp; &nbsp; {{loadingHoldFlag}} </span>
+
+
+                <div class="span12 campStats">
+                    <div>Total Items in Hold : <a href="/#/holdbucket/hold">&nbsp;{{totalHoldWorkItems}}&nbsp;</a></div>
+                    <div>Attention Required : <a href="/#/holdbucket/attention">
+                        &nbsp;{{attentionRequiredItems}}&nbsp;</a></div>
+                </div>
+                <span ng-show='emptyCampaignsFlag'><br/>{{emptyCampaignsMsg}} </span>
+
+                <div class="span12 campDetail">
+
+
+                    <div class="row-fluid " ng-repeat="campaign in activeCampaignsList">
+                        <div class="span3 campaignInfo"><h6>{{campaign.name}} </h6>
+                            <span class="date">{{campaign.startDate | date:'MM-dd-yyyy'}} to {{campaign.endDate| date:'MM-dd-yyyy'}}</span><span
+                                    class="tag {{campaign.status | lowercase}}">{{campaign.status}}</span><br>
+
+							<span value="campaign.description" data-toggle="tooltip" tooltip="campaign.description"
+                                  class="font">
+							{{campaign.description}} </span>
+
+                            <div class="span12 actionDiv">
+
+                                <a href="/#/showCampaignWorkItems/{{campaign._id}}" class="btn lightBlue-icon"><span
+                                        class="EPActionBtn btnWorkitem"></span><span>Work Items</span></a>
+
+                            </div>
+                        </div>
+                        <!-- Included the campaign-table.html file -->
+                        <ng-include src="'partials/campaign-table.html'"></ng-include>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

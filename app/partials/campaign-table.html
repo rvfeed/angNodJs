@@ -1,0 +1,106 @@
+<div class="span7">
+    <table cellspacing="0" cellpadding="0" border="0" id="genpopSummary" class="colAdjust table table-striped">
+        <thead>
+        <tr role="row-fluid">
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"></th>
+            <th class="center" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="4"
+                aria-label="Browser: activate to sort column ascending">Work-Items
+            </th>
+            <th class="center" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="4"
+                aria-label="Platform(s): activate to sort column ascending">Associated Accounts
+            </th>
+        </tr>
+        </thead>
+
+        <tbody role="alert" aria-live="polite" aria-relevant="all">
+        <tr class="gradeA odd selected">
+            <td class=""></td>
+            <td class="right">Count</td>
+            <td class="right ">% Count</td>
+            <td class="right">MWH</td>
+            <td class="right ">% MWH</td>
+
+            <td class="right">Count</td>
+            <td class="right ">% Count</td>
+            <td class="right">MWH</td>
+            <td class="right ">% MWH</td>
+
+        </tr>
+        <tr ng-repeat="totalsummary in campaign.summary">
+            <td class="right"> {{totalsummary.category}}</td>
+            <td class="right"> {{totalsummary.workItems |number:0}}</td>
+            <td class="right"> {{totalsummary.workItemsPercentage | number:0 }}</td>
+            <td class="right"> {{totalsummary.kWh / 1000 | number:0}}</td>
+            <td class="right"> {{totalsummary.kWhPercentage | number:0}}</td>
+
+            <td class="right"> {{totalsummary.associatedAccounts |number:0}}</td>
+            <td class="right"> {{totalsummary.associatedAccountsPercentage | number:0}}</td>
+            <td class="right"> {{totalsummary.associatedAccountskWh / 1000| number:0}}</td>
+            <td class="right"> {{totalsummary.associatedAccountskWhPercentage| number:0}}</td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+
+
+<div class="span2">
+    <table cellspacing="0" cellpadding="0" border="0" id="topAgents" class="table table-striped">
+        <thead>
+        <tr role="row-fluid">
+            <th class="sorting_asc nowrap" role="columnheader" tabindex="0" aria-controls="example" rowspan="1"
+                colspan="1"
+                aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"> Top Agents
+            </th>
+            <th class="right nowrap" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                aria-label="Browser: activate to sort column ascending">Saved MWH
+            </th>
+
+        </tr>
+        </thead>
+
+        <tbody role="alert" aria-live="polite" aria-relevant="all">
+        <tr>
+            <td class="nowrap">{{campaign.agentSavedList[0].fullName|truncate}}</td>
+            <td class="right">{{campaign.agentSavedList[0].savedAggregatekWh / 1000 | number:0 }}&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="nowrap">{{campaign.agentSavedList[1].fullName|truncate}}</td>
+            <td class="right">{{campaign.agentSavedList[1].savedAggregatekWh / 1000 | number:0 }}&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="nowrap">{{campaign.agentSavedList[2].fullName|truncate}}</td>
+            <td class="right">{{campaign.agentSavedList[2].savedAggregatekWh / 1000 | number:0 }}&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="nowrap">{{campaign.agentSavedList[3].fullName|truncate}}</td>
+            <td class="right">{{campaign.agentSavedList[3].savedAggregatekWh / 1000 | number:0 }}&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="nowrap">{{campaign.agentSavedList[4].fullName|truncate}}</td>
+            <td class="right">{{campaign.agentSavedList[4].savedAggregatekWh / 1000 | number:0 }}&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="nowrap">{{campaign.agentSavedList[5].fullName|truncate}}</td>
+            <td class="right">{{campaign.agentSavedList[5].savedAggregatekWh / 1000 | number:0 }}&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="nowrap">&nbsp;</td>
+            <td class="right">&nbsp;</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+</div>
+
+
+<div class="row-fluid">
+
+
+</div>
+
+
+<div id="push"></div> 

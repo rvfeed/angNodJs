@@ -1,0 +1,74 @@
+<!-- Begin page content -->
+<div class="container-fluid" ng-controller="setMenuLinks">
+
+    <ng-include src="'partials/navbar-common.html'"></ng-include>
+
+    <div class="row-fluid">
+        <div class="conBlock span12">
+            <h3>Campaign Dashboard <span ng-show='loadingFlag'>&nbsp; &nbsp; &nbsp; (Loading...)</span><span style="float:right;"> Current Date: {{today | date:'MM-dd-yyyy'}}</span></h3>
+
+            <span ng-show='loadingFlag'>&nbsp; &nbsp; &nbsp; Load info: {{loadingStatus}} </span>
+
+            <div id="campDashboard">
+                <div class="row-fluid campFilterAdd">
+
+                    <div class="well span12 greenBorderBox">
+                        <div class="form-horizontal addCampaign">
+                            <div class="control-group">
+
+                                <a href="/#/addCampaign" class="btn span2 btn-success">Add Campaign</a>
+                                <a href="/#/CampaignPriority" class="btn btn-success span2 offset1">Campaign
+                                    Priority</a>
+
+                                <div class="span8 tempLinks">
+
+                                    Calculation as of :
+                                    {{activeCampaignsList[0].updateDate | date:'MMM d, y h:mm a' }}
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="span12 campDetail">
+                    <span ng-show='emptyCampaignsFlag'>&nbsp; &nbsp; &nbsp; {{emptyCampaignsMsg}} </span>
+
+                    <div class="row-fluid " ng-repeat="campaign in activeCampaignsList">
+                        <div class="span3 campaignInfo"><h6>{{campaign.name}} </h6>
+                            <span class="date">{{campaign.startDate | date:'MM-dd-yyyy'}} to {{campaign.endDate| date:'MM-dd-yyyy'}}</span><span
+                                    class="tag {{campaign.status | lowercase}}">{{campaign.status}}</span><br>
+
+							<span value="campaign.description" data-toggle="tooltip" tooltip="campaign.description"
+                                  class="font">
+							{{campaign.description}} </span>
+
+                            <div class="span12 actionDiv">
+                                <a href="/#/editCampaign/{{campaign._id}}" class="btn lightBlue-icon"><span
+                                        class="EPActionBtn btnEdit"></span><span>Edit</span></a>
+                                &nbsp;
+                                <a href="/#/showCampaignWorkItems/{{campaign._id}}" class="btn lightBlue-icon"><span
+                                        class="EPActionBtn btnWorkitem"></span><span>Work Items</span></a>
+                                &nbsp;
+                                <a href="/#/copyCampaign/{{campaign._id}}/copy" class="btn lightBlue-icon"><span
+                                        class="EPActionBtn btnCopy"></span><span>Copy</span></a>
+
+                                <span ng-show="!campaign.workItemsExists" class="leftMargin"> <a href=""
+                                                                                                 ng-click="deleteCampaign(campaign)"
+                                                                                                 class="btn lightBlue-icon"><span
+                                        class="EPActionBtn btnCopy"></span><span>Delete</span></a>   </span>
+                            </div>
+                        </div>
+                        <!-- Included the campaign-table.html file -->
+                        <ng-include src="'partials/campaign-table.html'"></ng-include>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dialog-confirm" title="Delete Campaign" style="display: none">
+    <p align="center"></p>
+</div>

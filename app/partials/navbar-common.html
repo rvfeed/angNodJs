@@ -1,0 +1,23 @@
+<!-- Begin page content -->
+<div class="row-fluid navbar navbar-inverse navbar-fixed-top"  ng-controller="setMenuLinks">
+    <div class="navbar-inner">
+        <div class="container-fluid"  >
+            <a class="span3 brand" style="cursor:default;"></a>
+            <div class="span5 nav-collapse collapse">
+                <ul class="nav">
+                    <li ng-repeat='link in links'
+                        ng-class="{ active: $route.current.activetab == link.navUrl }">
+                        <a href="{{link.url}}">{{link.name}}</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+            <div class="span2 userNameBox">
+                <em>{{user.firstname}} {{user.lastname}}</em>
+            </div>
+
+            <div class="span1 adminArea">
+                <a href="/logout" style="color:#fff;">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>

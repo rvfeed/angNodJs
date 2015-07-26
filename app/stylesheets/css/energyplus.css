@@ -1,0 +1,377 @@
+@charset "utf-8";
+/* CSS Document */
+h3, h4, h5{ color:#3378b8}
+h3 {  font-size: 20px;border-bottom:1px solid #dfdfdf; margin-top:0 }
+h4{ text-transform:uppercase; font-size:15px; margin-top:0 }
+h5{ font-style:none;}
+h6{ font-size:18px; padding-left:6px}
+h7{ font-size: 14px;line-height: 18px; font-weight: bold;}
+.txtCenter{ text-align:center}
+.heightAuto{ min-height:auto !important}
+.h150{ height:150px !important}
+.h190{ height:220px !important}
+.right{ text-align:right !important}
+.flRight{ float:right !important}
+.blueBorderBox{ background-color:#ecf5ff !important; border:1px solid #ced8e2 !important}
+.greenBorderBox{ border:1px solid #c2dcb3; background-color:#f1fedf}
+.marTop20{ margin-top:20px !important}
+.dateCal{ background:url(../img/calimg.gif) no-repeat scroll 4px center #FFFFFF}
+.nowrap{ white-space: nowrap}
+.bdrLeft{ border-left:1px solid #ccc}
+
+body{ background:url(../img/bgimage1.jpg) left bottom repeat-x #fff; width:100%; border-top:5px solid #3e89ca; float:left;  font-size:12px; font-family:arial; padding-bottom:0px }
+.conBlock{ border: 1px solid #C7D8EA; background-color:#fff;    box-shadow: 0 -3px 3px #CCCCCC;    float: left;    padding: 12px 20px;    width: 1320px; margin-bottom:40px; }
+
+.navbar-fixed-top, .navbar-fixed-bottom{ position:relative}
+.navbar .brand {  background:url(../img/eplogo230.png) 0 0 no-repeat; height:28px; margin-top:4px;}
+
+.navbar-fixed-top .navbar-inner, .navbar-static-top ter{ box-shadow:none; padding:20px 0}
+.navbar-inner .container-fluid{ padding:0}
+.navbar .nav {   width:465px;  float: none;   margin:0 auto;    position: relative; }
+.filterOptions{ background-color:#ecf5ff; border:1px solid #ced8e2; position:relative; padding:10px 20px}
+.filterOptions .form-actions{ padding:0}
+.filterOptions .downarrow{ background:url(../img/down-arrow.gif) center bottom no-repeat; width:45px; height:23px; position:absolute; bottom:-23px; left:48%}
+.noMarLeft{ margin-left:0 !important}
+
+.form-horizontal .control-group{ margin-bottom:5px}
+.form-horizontal .control-group span.colLabel{    float: left;    font-size: 12px;    text-align: center;    width:50px;}
+.form-horizontal .controls { margin-left: 98px; }
+.form-horizontal .controls input.dateCal1{width: 75px;  padding: 3px;    font-size: 12px;}
+.form-horizontal .control-label {    float: left;      text-align: right;    width:94px;}
+.filterData{ margin:0}
+
+
+
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{ height:15px}
+
+
+.formItem{ clear:both; display:table;}
+.form-actions{ background:none transparent; border:none; margin:0}
+.btn-go{ background:url(../img/btn-go.png) 0 0 no-repeat; width:40px; height:27px}
+.radio label{   float: left;    width: 54px; line-height:25px}
+.radio input{ width:14px}
+.form-horizontal .radio{ padding-left: 4px;    padding-top: 3px;}
+.radio input[type="radio"], .checkbox input[type="checkbox"]{ margin-left:0}
+select, input[type="file"] {    font: 12px/16px arial;    height: 20px;  }
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{ border-radius:0}
+.btn{ line-height:17px}
+
+#footer{  color: #FFFFFF;    padding-top: 160px;      text-align: center;    width: 100%;}
+#footer .container-fluid{  background: none repeat scroll 0 0 #3E89CA;    height: 40px;    line-height: 40px;}
+
+/*Feed Table*/
+
+label, input, button, select, textarea{ font-size:12px}
+.dataTables_wrapper .recPage{ text-align:right;}
+.table thead th {    background-color: #82A6C9;    color: #FFFFFF;    vertical-align: bottom;}
+.table .center{ text-align:center;}
+#eplusGrid_wrapper .span9{ text-align:right; float:right;}
+#eplusGrid_wrapper .pagination{ margin:0}
+#eplusDataTable tbody > tr:nth-child(2n+1) > td{ background-color:#fff}
+.table-striped tbody > tr:nth-child(2n+1) > td{ background-color:#effbf9 !important}
+#eplusDataTable td, #eplusDataTable th{ padding:7px}
+#eplusDataTable tr td:first-of-type, #eplusDataTable tr th:first-of-type{ border-left:1px solid #84a8ca}
+#eplusDataTable th, #eplusDataTable td{ border-left:0}
+#eplusDataTable tr.selected td{ background-color:#fcfed2}
+#eplusDataTable{border-color:#84a8ca #84a8ca #84a8ca -moz-use-text-color}
+#eplusRPPField{ margin-top:-25px}
+
+/*Nav*/
+.adminArea {
+    background-color: #3C86D1;
+    border: 1px solid #3C86D1;
+    border-radius: 4px 4px 4px 4px;
+    color: #FFFFFF;
+    float: right !important;
+    font-size: 13px;
+    font-weight: bold;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+}
+.userNameBox {
+    background-color: #3C86D1;
+    border: 1px solid #3C86D1;
+    border-radius: 9px 9px 9px 9px;
+    color: #FFFFFF;
+    /*float: right !important;*/
+    font-size: 13px;
+    /*font-weight: bold;*/
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+}
+
+.navbar-inverse .nav .active > a,
+.navbar-inverse .nav .active > a:hover,
+.navbar-inverse .nav .active > a:focus {
+    color: #009b7b;  background:none;   border-bottom:3px solid #009b7b; padding-bottom:4px; box-shadow:none;}
+
+.navbar-inverse .navbar-inner {
+    background-color:transparent;
+    background-image: none;
+    background-repeat: no-repeat;
+    border: none; filter:none;
+
+}
+
+.navbar .nav > li{ border-right:1px solid #ccc}
+.navbar .nav > li:last-of-type{ border:none}
+
+.navbar-inverse .brand,
+.navbar-inverse .nav > li > a {
+    color: #009B7B;
+    margin: 0 4px;
+    padding: 4px 12px;
+    text-shadow: none; font-size:13px;
+}
+.navbar-inverse .nav > li > a:focus,
+.navbar-inverse .nav > li > a:hover {
+    color: #009b7b;
+    background-color: transparent;
+}
+/*Nav over*/
+
+.campInfo{ border: 1px solid #CED8E2;    padding:20px;}
+.campInfo .span12 { margin-left:0}
+.calImg{ background:url(../img/calimg.gif) 0 0 no-repeat ; width:15px; height:16px;  }
+.campInfo textarea{ height:100px}
+.readableTxtArea{  background-color: #FFFFFF !important;    height: 178px !important;}
+
+#campDashboard .filter{}
+#campDashboard [class*="span"]{ margin-left:0}
+#campDashboard .span5{ width:40.5%}
+#campDashboard .span7{width: 56.999%}
+#campDashboard .campFilterAdd .span7{ margin-left:.2%}
+#campDashboard .greenBorderBox .control-label{    width: 112px; color:#15891e}
+/*
+#campDashboard .addCampaign .control-group{ background:url(../img/green-add.png) 0 0 no-repeat; padding-left:36px}
+ */
+
+#campDashboard .campDetail{ font-weight:bold;}
+#campDashboard .campDetail > .row-fluid{  border: 1px solid #3774AF;    border-radius: 4px 4px 4px 4px;    margin-bottom:20px;}
+#campDashboard .campDetail .campaignInfo{   background: url("../img/camp-active.png") repeat-y scroll 0 0 #71A6DA;    color: #FFFFFF;    min-height: 175px;    padding-left: 6px;    position: relative;}
+#campDashboard .campDetail .campaignInfo .font{word-wrap: break-word;font-weight: normal; height: 31px;line-height: 15px;overflow: hidden;padding: 21px 6px 0; float:left; width:92%;}
+
+.tooltip{word-wrap: break-word;}
+
+#campDashboard .campStats div{float: left;    width: auto;    padding-right: 20px;}
+#campDashboard .campStats div a{background-color: #ffefe9;    border: 1px solid #f4ccbd;    border-radius: 4px; font-size:16px}
+
+#campDashboard .campDetail .futureCamp{ background-image:url(../img/future-camp.png)}
+#campDashboard .campDetail .pastCamp{ background-image:url(../img/past-camp.png)}
+
+#campDashboard .campDetail .span3{ width:27.9%}
+#campDashboard .campDetail .span1{ width:3.6%}
+#campDashboard .campDetail span.date{ font-size:14px; font-weight:bold; padding-left:6px  }
+#campDashboard .campDetail .tag, #campPriority .campDetail .tag { border-radius:2px; border:1px solid; padding:1px 5px; color:#fff; text-transform:uppercase; font-size:10px; margin-left:10px}
+#campDashboard .campDetail .active{ background-color:#31c43c; border-color:#32a44f;}
+#campDashboard .campDetail .future{ background-color:#dd7e17; border:1px solid #ad5c04}
+#campDashboard .campDetail .past,  #campPriority .campDetail .past{ background-color:#77624d; border:1px solid #584532}
+#campPriority .campDetail .future{ background-color:#dd7e17; border:1px solid #ad5c04; margin: 0;}
+#campPriority .campDetail .active{ background-color:#31c43c; border-color:#32a44f; margin: 0;}
+#campDashboard .campDetail .campaignInfo .actionDiv{background-color: #9CC1E5; width:98.8%;   bottom: 0;    padding: 4px 3px 2px 6px;    position: absolute;    right: 0;}
+
+
+#campPriority .campDetail .span3{width:23.4043%}
+#campPriority .well .span10, #campPriority .well .span2, #campPriority .well .span12{ margin-left:0}
+#campPriority .priorityDetails{ border:1px solid #ccc; background-color:#fff}
+#campPriority .priorityDetails .table-striped{ margin-bottom: 0}
+#campPriority .priorityDetails .span3{width:20.5%; border-left:1px solid #ddd; margin:0}
+#campPriority .priorityDetails .span9{width:79.5%;}
+#campPriority .priorityDetails .span9 td, #campPriority .priorityDetails .span9 th{ padding: 5px}
+
+.lightBlue-icon{ background: url("../img/lblue-btn-bg.png") repeat-x scroll 0 0 transparent;
+    border: 1px solid #E7EBF0;    color: #214466;    font-family: arial;    font-size: 12px;    font-weight: bold;    height: 17px;    padding: 2px 4px;}
+.lightBlue-icon:hover{ background-position:0 -22px}
+
+.lightBlue-icon span{ float: left; line-height:18px}
+.lightBlue-icon span.EPActionBtn{ background: url("../img/btn-icons.png") no-repeat scroll 0 0 transparent;
+    border-right: 1px solid #e7ebf0;    float: left;    height: 18px;    /*margin-right: 7px;*/    width: 24px;}
+.lightBlue-icon span.btnEdit{ background-position: 0 0    }
+.lightBlue-icon:hover span{ border-color:#ccc}
+.lightBlue-icon span.btnWorkitem{ background-position:0 -25px}
+.lightBlue-icon span.btnCopy{ background-position:0 -48px}
+
+#genpopSummary, #topAgents{ border:none; color:#444; margin:0; border-right:1px solid #cad1d8}
+#genpopSummary td, #topAgents td{padding:5px}
+#topAgents{ border-right:0}
+#genpopSummary thead th{ background-color:#f4faf9; color:#444; border-bottom:1px solid #dde4e3}
+#genpopSummary th, #genpopSummary td, #topAgents th, #topAgents td  { line-height:11px}
+#genpopSummary tr td, #topAgents tr td{ border-top:none}
+#genpopSummary tr td:first-of-type{ color:#098b6e; font-weight:bold;}
+#genpopSummary tbody > tr:nth-child(2n+1) > td{ background-color:#e0f2ef !important}
+#genpopSummary .even td{ background-color:#f0f9f7}
+
+#topAgents thead th{ background-color:#fff9f7; color:#444; border-bottom:1px solid #dde4e3}
+#topAgents tr td:first-of-type{ color:#c45126; font-weight:bold;}
+#topAgents tbody > tr:nth-child(2n+1) > td{ background-color:#ffefe9 !important}
+#topAgents .even td{ background-color:#fff7f4}
+
+#campPriority #topAgents td, #campPriority #topAgents th {padding:5px 3px; line-height: 20px; border-bottom:1px solid #DDE4E3}
+
+.seqChange{  background-color:#e8e8e8; border-left:1px solid #fff; }
+.topDown{text-align:center; }
+.topDown a{ background:url(../img/top-down.png) center top no-repeat; width:32px; height:48px; float:left;}
+.topDown a{ float:none !important;  margin:0 auto !important;}
+.topDown .moveUp{ border-bottom:1px solid #c7c7c7}
+.topDown .moveDown{ border-top:1px solid #fff}
+.topDown .moveUp a{ background-position:center top;}
+.topDown .moveDown a{background-position:center bottom;}
+.topDown .arrowCon{ padding:9px 0; }
+
+/*LightBox CSS*/
+.lightbox{width:765px; padding:0; margin:0 auto}
+.lightbox-content{ padding:0; border:4px solid #ccc; width:100%}
+.lightbox h5{  background-color: #82A6C9;    border-top-left-radius: 3px;    border-top-right-radius: 3px;    color: #FFFFFF;    font-size: 16px;    margin: 0;    padding: 5px 10px;    text-align: left; text-transform:uppercase}
+.lightbox .ruleRow{padding:20px}
+/*.lightbox .ruleCol{ width:195px;}*/
+#rulesLightbox{ width:1000px}
+#rulesLightbox .span8{width: 65.5%; margin-left: 0;    border-right: 1px solid #CCC;    padding-right: 20px; min-height:265px}
+#rulesLightbox .span4{float: right; width: 32%;}
+#rulesLightbox .row-fluid {    width: 960px;    padding: 20px;}
+#rulesLightbox h4{ text-align: left}
+#summaryLightbox{ width:450px}
+#ruleDataLightbox{ width:955px; }
+.lightbox .ruleCol ul{ float:left; list-style:none;  width:215px; margin-bottom:0}
+.lightbox .ruleCol ul:first-of-type{ margin-left:0}
+.lightbox .ruleCol ul li{   float: left;    margin-bottom: 2px;    padding: 3px;    text-align: left;    width:97%;}
+.lightbox .ruleCol ul li input{ width:14px; margin-top:0}
+.lightbox .ruleCol ul li.selected{ background-color:#fcfed2; border:1px solid #edeedf;  margin-left: -1px;    margin-top: -1px;}
+.lightbox .action{   float: left;    padding-bottom: 20px;    text-align: right;    width: 100%;}
+
+.lightbox #genpopSummary{ border:1px solid #CAD1D8;  margin-bottom:20px }
+.lightbox #genpopSummary span{ font-weight:normal}
+.lightbox .close{ background: url("../img/btn-close.png") no-repeat scroll 0 0 transparent; height: 34px; position: absolute;right: 0;top: 11px;    width: 34px;}
+
+#ruleDataLightbox .ruleBlock{  border: 1px solid #C6D0DA;    float: left;    margin-left: 18px;    width: 210px; margin-bottom:16px }
+#ruleDataLightbox .ruleBlock:first-of-type{ margin-left:0}
+#ruleDataLightbox .ruleBlock h6{   background-color: #ECF5FF;    border-top: 1px solid #FFFFFF;    color: #444444;    font-size: 12px; margin:0;    padding: 4px 10px;    text-align: left;}
+#ruleDataLightbox .ruleBlock .row{ width:100%; margin-left:0; margin-top:10px }
+#ruleDataLightbox .ruleBlock .row label{ width:34px; text-align:right; float:left; padding-right:10px; line-height:25px}
+#ruleDataLightbox .ruleBlock .row input{ float:left; width:140px; font-size:12px }
+#ruleDataLightbox .ruleBlock .row input.smllInput{ margin-left: 10px;    width: 75px;}
+#ruleDataLightbox select{   border: medium none;    margin: 0;    width: 210px; height:90px}
+#ruleDataLightbox .padLeft{ padding-left:10px}
+
+
+.gridStyle, #wiGrid {
+    height: 7400px;
+    margin-left: 0px;
+}
+#gridTopPager {
+    border-bottom: solid 1px rgb( 212, 212, 212);
+    height: 50px;
+}
+
+.newAgentStyle {
+    background-color: #2e8b57 !important;
+    color: white;
+    /*font-style: italic;*/
+}
+.holdBucketStyle {
+    background-color: #1e90ff !important;
+    color: white;
+    /*font-style: italic;*/
+}
+.doNotCallStyle {
+    background-color: #b22222 !important;
+    color: white;
+    font-style: italic;
+}
+
+.greenCell {
+    background-color: green;
+    color: white;
+    font-style: italic;
+}
+.numberCell {
+    text-align: right;
+}
+.epPagerButton {
+
+    margin-top: -10px;
+    height: 26px;
+}
+
+.ngbottomControl .epPagerButton { margin-top:0}
+
+.ui-sortable-helper{ border: 2px dashed #000; margin: 5px; opacity: 0.5; }
+#campaignOrder tr td{ padding:8px;  cursor: move;}
+.actionDiv .leftMargin{ margin-left: 6px; }
+
+#campDashboard .tempLinks{ float: right;   padding-left: 60px;}
+#campDashboard .addCampaign a{ margin: 0 10px}
+#campDashboard .tempLinks .tempLable{ line-height: 28px}
+.dateFormat{ clear:both; font-size:11px; }
+.dateFormat1{ clear:both; font-size:12px; }
+
+.copyLeft {padding-top:5px;float:left;position:relative; display:block; }
+.copyLeft2 {padding-top:5px;padding-left:575px;float:left;position:relative; display:block; }
+.rstButton{width:auto; margin:10px 0 0; display:table; text-align:center; vertical-align:middle; float:left;}
+.rstButton p{margin:0; padding:0;}
+
+
+#genpopSummary tr td:nth-child(5){border-right:1px solid #CCCCCC;}
+#genpopSummary tr th:nth-child(2){border-right:1px solid #CCCCCC;}
+#prioritys tr th:nth-child(2){border-right:1px solid #CCCCCC;}
+
+
+.visualRule{ width:620px; text-align: left}
+.visualRule table{ float:left}
+.visualRule select{ height: 28px;    float: left;    width: 194px;    margin-right: 10px;}
+.visualRule select.selOperator{ width:100px}
+.visualRule select.multiSel{height:75px}
+.visualRule input{ float:left; height:18px}
+.visualRule button{  margin-left:10px}
+.visualRule .controls{ float:left; width:100%}
+.visualRule .datePicker{ float: left}
+.visualRule .radioBtn{ float: left;             width: 50px;    padding-left: 20px;}
+.visualRule .radioBtn label{float: left;      line-height: 27px;    text-transform: uppercase;    padding-left: 4px;}
+.visualRule .control-group{ float: left; width:100%}
+
+.visualRule .condBtwen{ font-size:14px}
+.visualRule .condBtwen .labelHd{float: left;                width: 160px;    line-height: 25px;}
+.visualRule .btn-danger{ font-weight:bold; height:25px}
+.visualRule td{ padding:5px}
+.datepicker{z-index:10000}
+
+.smallLabel {font-size: smaller;}
+
+
+.ui-widget-header{background-color: #82A6C9 !important;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: white !important;
+    font-size: 16px;
+    margin: 0;
+    padding: 5px 10px !important;
+    text-align: left;
+    text-transform: uppercase;
+    background-image: none !important;
+    font-weight: normal !important;
+    border: none !important;}
+
+.ui-draggable{
+    border: 4px solid #CCC !important;
+    padding: 0 !important;
+    border-radius: 6px !important;}
+
+.ui-dialog-titlebar-close{background: url("../img/btn-close.png") no-repeat scroll 0 0 transparent !important;
+    height: 34px !important;
+    position: absolute !important;
+    right: -14px !important;
+    top: -1px !important;
+    width: 34px !important;
+    border: none !important;}
+.ui-dialog .ui-dialog-buttonpane{ border:0 !important;  margin-top: 0 !important; padding:0 1em .5em .4em}
+.ui-dialog input[type=text]{margin-top: 10px;}
+
+/*Agents Table 100%*/
+
+.dataTables_wrapper .row-fluid .recPage{width:100%;}
+.row-fluid #feedData h4{width:100%; float:left; text-align:left;}
+
+table.colAdjust tr th:nth-child(1){width:19%}
+table.colAdjust tr th:nth-child(2), table.colAdjust tr:nth-child(3){width:41%}
+

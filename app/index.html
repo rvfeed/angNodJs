@@ -1,0 +1,84 @@
+<!doctype html>
+<html xmlns:ng="http://angularjs.org/" ng:app="myApp">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <title>Energy Plus provides electricity to homes and businesses in Connecticut, Illinois, New Jersey, New York, Maryland, Ohio, Pennsylvania and Texas</title>
+    <!--<link rel="stylesheet" href="/stylesheets/style.css" type="text/css"/>-->
+
+    <link rel="stylesheet" href="/stylesheets/css/bootstrap-lightbox.css" type="text/css"/>
+    <link rel="stylesheet" href="/stylesheets/css/bootstrap-responsive.css" type="text/css"/>
+    <link rel="stylesheet" href="/stylesheets/css/bootstrap-responsive.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/stylesheets/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/stylesheets/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/stylesheets/css/datepicker.css" type="text/css"/>
+    <link rel="stylesheet" href="/stylesheets/css/energyplus.css" type="text/css"/>
+    <link rel="stylesheet" href="/stylesheets/ng-grid.css" type="text/css"/>
+    <link rel="stylesheet" href="/stylesheets/css/jquery-ui.css" type="text/css"/>
+    <base href="/app">
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lte IE 8]>
+    <script>
+        document.createElement('ng-include');
+        document.createElement('ng-pluralize');
+        document.createElement('ng-view');
+
+        // Optionally these for CSS
+        document.createElement('ng:include');
+        document.createElement('ng:pluralize');
+        document.createElement('ng:view');
+    </script>
+    <![endif]-->
+</head>
+<body>
+
+<ng-view></ng-view>
+
+<div id="footer">
+    <div class="container-fluid">
+       
+    </div>
+</div>
+
+<script src="/js/lib/ieConsole.js" ></script>
+<script src="/js/lib/angular/angular.js" ng:autobind></script>
+<!-- n.b. currently lib linked is Angular v 1.0.2 -->
+
+<script src="/js/lib/angular/angular-resource.js" ></script>
+<script src="/js/app.js"></script>
+
+<script src="/js/controllers/controller-helper.js"></script>
+<script src="/js/controllers/rulesEngine-helper.js"></script>
+<script src="/js/controllers/campaignsListController.js"></script>
+<script src="/js/controllers/cookieController.js"></script>
+<script src="/js/controllers/editCampaignController.js"></script>
+<script src="/js/controllers/genPopController.js"></script>
+<script src="/js/controllers/homeController.js"></script>
+<script src="/js/controllers/indexController.js"></script>
+<script src="/js/controllers/menuLinksController.js"></script>
+<script src="/js/controllers/myCampaignListController.js"></script>
+<script src="/js/controllers/logsController.js"></script>
+<script src="/js/controllers/agentsController.js"></script>
+
+<script src="/js/filters.js"></script>
+<script src="/js/directives.js"></script>
+<script src="/js/services.js"></script>
+<script src="/js/lib/jquery/jquery-1.8.3.min.js"></script>
+<script src="/js/lib/jquery/jquery.js"></script>
+<!--<script src="/js/lib/jquery/jquery-1.9.1.js"></script>-->
+<!--<script src="/js/lib/jquery/jquery-migrate-1.1.0.js"></script>-->
+
+
+<script src="/js/lib/jquery/jquery-ui-1.10.1.js"></script>
+<script src="/js/lib/ng-grid/ng-grid-2.0.6a.debug.js"></script>
+<script src="/js/lib/ng-grid/plugins/ng-grid-flexible-height.js"></script>
+
+<script src="/js/lib/bootstrap/bootstrap.js"></script>
+<script src="/js/lib/bootstrap/bootstrap.min.js"></script>
+<script src="/js/lib/bootstrap/bootstrap-datepicker.js"></script>
+<script src="/js/lib/moment/moment.min.js"></script>
+</body>
+</html>

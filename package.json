@@ -1,0 +1,26 @@
+{
+    "name": "acme",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node app"
+    },
+    "dependencies": {
+        "express": "",
+        "moment": "",
+        "mongodb": "",
+        "angular": "",
+        "amqp": "",
+        "ejs": "",
+        "passport": "",
+        "passport-local": "",
+        "passport-oauth" : "",
+        "cron": "",
+        "mongoose": "",
+        "step": "",
+        "request": "",
+        "csv": "",
+        "async": "",
+        "pkginfo": ""
+    }
+}

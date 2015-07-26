@@ -1,0 +1,54 @@
+/*
+ This config file is only used by this envionment.  This was translated from a template using chef.
+<%
+  #This file is under version control in github but is not read directly by the app
+  # This is a template that will be translated using chef %>
+ */
+
+var config = {};
+
+// Application server and general settings
+config.application_domain = "localhost";
+config.server_port = <%= @acme_port %>;
+
+// database host & settings
+config.mongodb_ip = '<%= @mongodb_ip %>';
+config.mongodb_name = "<%= @mongodb_name %>";
+config.mongodb_port = <%= @mongodb_port %>;
+
+// security provider settings
+config.loginProvider = './routes/providers/provider-oauth-login';
+config.loginStrategy = 'EnergyPlus';
+config.sessionTimeout = 28800 * 1000; // 8 hours
+
+// Agent assignment queue settings
+config.message_ip = 'localhost';
+config.message_port = '5672';
+config.message_exchange_name = 'SalesManagementExchange';
+config.message_queue_name = 'SalesManagementQueue';
+
+//data API
+//config.acme_api = 'http://ep-cm-api-dev';
+//config.acme_api_port = 80;
+
+config.admin_role_ad = '<%= @admin_role_ad %>';
+config.agent_role_ad = '<%= @agent_role_ad %>';
+config.admin_role = '<%= @admin_role %>';
+config.agent_role = '<%= @agent_role %>'
+
+config.oauth_host = 'http://<%= @oauth_host %>';
+config.oauth_clientID = '<%= @oauth_client_id %>';
+config.oauth_clientSecret = '<%= @oauth_client_secret %>';
+
+config.oauth_auth_server = config.oauth_host + '/OAuthProvider';
+config.oauth_token = config.oauth_auth_server + '/oauth/token';
+config.oauth_authorize = config.oauth_auth_server + '/oauth/authorize';
+
+config.oauth_resource_endpoint = '/OAuthResourceServer';
+config.oauth_user_profile = '/DataApi.svc/web/userinfo';
+config.oauth_scope = config.oauth_resource_endpoint + config.oauth_user_profile;
+config.oauth_profile_url = config.oauth_host + config.oauth_scope;
+
+config.oauth_callbackURL ='http://<%= @acme_ip %>:' + config.server_port + '/';
+
+module.exports = config;

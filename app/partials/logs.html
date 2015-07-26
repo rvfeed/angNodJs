@@ -1,0 +1,52 @@
+<!-- Begin page content -->
+<div class="container-fluid">
+    <ng-include src="'partials/navbar-common.html'"></ng-include>
+    <div class="row-fluid">
+        <div class="conBlock span12">
+
+            <h3>Logs</h3>
+
+            <br/>
+            Number of issues to get: <input type="text" id="NumberOfIssueToGet" ng-model="NumberOfIssueToGet" style="width:60px;"/>
+            <button ng-click="getQueueLogItemsFromDb()" class="btn btn-primary" style="margin:0 10px 10px">Get Logs</button>
+            <br/>
+            <br/>
+            <div>Total Count: <strong>{{QueueLogItemsCount}}</strong></div>
+            <table cellpadding="5" cellspacing="5" align="center"  id="eplusDataTable"
+                   class="table table-striped table-bordered dataTable">
+                <thead>
+                <tr  align="center">
+                    <th class="nowrap">Pending Agent</th>
+                    <th class="nowrap">Event ID</th>
+                    <th class="nowrap">Drop Sys</th>
+                    <th class="nowrap">Energy Plus ID</th>
+                    <th class="nowrap">Insert User</th>
+                    <th>Description</th>
+                    <th class="nowrap">Updated Item</th>
+                    <th>Status</th>
+                    <th class="nowrap">Insert Date</th>
+                </tr>
+                </thead>
+                <tr  ng-repeat="queueLogItem in queueLogItems" align="center">
+
+                    <td>{{queueLogItem.PendingAgentUsername}}</td>
+                    <td>{{queueLogItem.eventId}}</td>
+                    <td>{{queueLogItem.dropOriginSystem}}</td>
+                    <td>{{queueLogItem.energyPlusID}}</td>
+                    <td>{{queueLogItem.insertUser}}</td>
+                    <td width="500">
+                       <span value="queueLogItem.Info" data-toggle="tooltip" tooltip="queueLogItem.Info"
+                          class="font">{{queueLogItem.Info}}</span></td>
+                    <td>{{queueLogItem.RemovePendingAgentItem}}</td>
+                    <td>{{queueLogItem.Success}}</td>
+                    <td>{{queueLogItem.insertDate | date:'MM-dd-yyyy HH:mm:ss'}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div id="push"></div>
+
+

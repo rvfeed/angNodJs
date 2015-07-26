@@ -1,0 +1,677 @@
+<!-- Begin page content -->
+<div class="container-fluid">
+
+<ng-include src="'partials/navbar-common.html'"></ng-include>
+
+<div class="row-fluid">
+<div class="conBlock span12">
+<label ng-show="showGenPopText"><h3>Gen-Pop <span ng-show='loadingFlag'>&nbsp; &nbsp; &nbsp; (Loading...)</span></h3></label>
+<label ng-show="showHoldText"><h3>Hold Bucket<span ng-show='loadingFlag'>&nbsp; &nbsp; &nbsp; (Loading...)</span></h3></label>
+<!--<label ng-show="showWorkItemsText"><h3>Campaign Work Items</h3></label>-->
+<label ng-hide="checkGenpop" style="margin-bottom: 15px; margin-top: 15px;">
+    <h3>{{campaignName}}<span style="color:#009B7B;font-size: 13px;"> ( From <strong>{{campaignStartDate.toDate() | date:'MM-dd-yyyy'}}</strong> to  <strong>{{campaignEndDate.toDate() | date:'MM-dd-yyyy'}} ) </strong></span></h3>
+</label>
+
+<h5>Filters <input type="button" id="btnshow"  class="btn"  onclick="slideToggle('-')" value="-">
+            <input type="button" id="btnhide"  class="btn"  onclick="slideToggle('+')" value="+" style="display:none">
+</h5> 
+
+
+<div id="filters">
+
+
+<div class="well span12 noMarLeft filterOptions">
+<form class="filterData" name="form">
+<div class="span12 formItem">
+<div id="firstColumn" class="span3">
+    <div class="form-horizontal">
+
+        <div class="control-group">
+            <label class="control-label"></label>
+
+            <div class="controls">
+                <span class="span6 txtCenter heightAuto">Min</span><span
+                    class="span6 txtCenter heightAuto">Max</span>
+            </div>
+        </div>
+
+        <!-- Normalized Annual Usage -->
+        <div class="control-group">
+            <label class="control-label smallLabel">Norm Ann Usage</label>
+
+            <div class="controls">
+
+                <!--????? what is this for?-->
+                <input type="text" ng-show="false">
+
+                <input type="text" id="minNormAnnUsage" class="span6" ng-model="filters.normalizedAnnualUsage[0]"
+                       name="minNormAnnUsage" ng-pattern="/[0-9]+$/"/>
+                <input type="text" id="maxNormAnnUsage" class="span6" ng-model="filters.normalizedAnnualUsage[1]"
+                       name="maxNormAnnUsage" ng-pattern="/[0-9]+$/"/>
+            </div>
+            <div class="controls">
+                <span ng-show="form.minNormAnnUsage.$invalid">Enter valid min normalized usage value!</span>
+                <span ng-show="form.maxNormAnnUsage.$invalid">Enter valid max normalized usage value!</span>
+                <span ng-show="normAnnUsageErrorMessage">Min value should be less than Max value</span>
+            </div>
+        </div>
+
+        <!-- Aggregate kWh over entire master account, normalized?? -->
+        <div class="control-group">
+            <label class="control-label">Aggr KWH </label>
+
+            <div class="controls">
+                <input type="text" ng-init="aggrKWH='AggrKWH'" ng-show="false">
+                <input type="text" id="minAggrKWH" class="span6" ng-model="filters.aggregatekWh[0]"
+                       name="minAggrConsumption" ng-pattern="/[0-9]+$/"/>
+                <input type="text" id="maxAggrKWH" class="span6" ng-model="filters.aggregatekWh[1]"
+                       name="maxAggrConsumption" ng-pattern="/[0-9]+$/"/>
+            </div>
+            <div class="controls">
+                <span ng-show="form.minAggrConsumption.$invalid">  Enter valid min Aggr KWH value!</span>
+                <span ng-show="form.maxAggrConsumption.$invalid">  Enter valid max Aggr KWH value!</span>
+                <span ng-show="aggrkWhErrorMessage">  Min value should be less than Max value</span>
+            </div>
+        </div>
+
+        <!-- Annual electric kWh of this account -->
+        <div class="control-group">
+            <label class="control-label">Ann KWH</label>
+
+            <div class="controls">
+                <input type="text" ng-init="annKwh='AnnualKWH'" ng-show="false">
+                <input type="text" id="minAnnKWH" class="span6" ng-model="filters.annualkWh[0]"
+                       name="minAnnualConsumption" ng-pattern="/[0-9]+$/">
+                <input type="text" id="maxAnnKWH" class="span6" ng-model="filters.annualkWh[1]"
+                       name="maxAnnualConsumption" ng-pattern="/[0-9]+$/">
+            </div>
+            <div class="controls">
+                <span ng-show="form.minAnnualConsumption.$invalid">  Enter valid min Annual KWH value!</span>
+                <span ng-show="form.maxAnnualConsumption.$invalid">  Enter valid max Annual KWH value!</span>
+                <span ng-show="annkWhErrorMessage">  Min value should be less than Max value</span>
+            </div>
+        </div>
+
+        <!-- Aggregated gas of the master associated account -->
+        <div class="control-group">
+            <label class="control-label">Aggr Gas</label>
+
+            <div class="controls">
+                <!--<input type="text" ng-init="annKwh='AnnualKWH'" ng-show="false">-->
+                <input type="text" id="minAggrGas" class="span6" ng-model="filters.aggregateGas[0]"
+                       name="minAggrGas" ng-pattern="/[0-9]+$/">
+                <input type="text" id="maxAggrGas" class="span6" ng-model="filters.aggregateGas[1]"
+                       name="maxAggrGas" ng-pattern="/[0-9]+$/">
+            </div>
+            <div class="controls">
+                <span ng-show="form.minAggrGas.$invalid">Enter valid min aggregate gas value!</span>
+                <span ng-show="form.maxAggrGas.$invalid">Enter valid max aggregate gas value!</span>
+                <span ng-show="aggrGasErrorMessage">Min value should be less than Max value</span>
+            </div>
+        </div>
+
+        <!-- Annual gas usage of this account -->
+        <div class="control-group">
+            <label class="control-label">Ann KWH</label>
+
+            <div class="controls">
+                <!--<input type="text" ng-init="annKwh='AnnualKWH'" ng-show="false">-->
+                <input type="text" id="minAnnGas" class="span6" ng-model="filters.annualGasUsage[0]"
+                       name="minAnnGas" ng-pattern="/[0-9]+$/">
+                <input type="text" id="maxAnnGas" class="span6" ng-model="filters.annualGasUsage[1]"
+                       name="maxAnnGas" ng-pattern="/[0-9]+$/">
+            </div>
+            <div class="controls">
+                <span ng-show="form.minAnnGas.$invalid">Enter valid min annual gas value!</span>
+                <span ng-show="form.maxAnnGas.$invalid">Enter valid max annual gas value!</span>
+                <span ng-show="annGasErrorMessage">Min value should be less than Max value</span>
+            </div>
+        </div>
+
+        <!-- Aggregated Green Electricity (???) -->
+        <div class="control-group">
+            <label class="control-label">Aggr Green</label>
+
+            <div class="controls">
+                <!--<input type="text" ng-init="annKwh='AnnualKWH'" ng-show="false">-->
+                <input type="text" id="minAggrGreen" class="span6" ng-model="filters.aggregateGreenkWh[0]"
+                       name="minAggrGreen" ng-pattern="/[0-9]+$/">
+                <input type="text" id="maxAggrGreen" class="span6" ng-model="filters.aggregateGreenkWh[1]"
+                       name="maxAggrGreen" ng-pattern="/[0-9]+$/">
+            </div>
+            <div class="controls">
+                <span ng-show="form.minAggrGreen.$invalid">Enter valid min aggregated green kWh value!</span>
+                <span ng-show="form.maxAggrGreen.$invalid">Enter valid max aggregated green kWh value!</span>
+                <span ng-show="aggrGreenkWhErrorMessage">Min value should be less than Max value</span>
+            </div>
+        </div>
+
+
+
+        <!-- Contact Name -->
+        <div class="control-group">
+            <label class="control-label">Contact Name</label>
+
+            <div class="controls">
+
+                <input type="text" id="contName" class="span12" ng-model="filters.contactName"
+                       name="contactName" ng-pattern="/[a-zA-Z]+$/">
+
+                <span ng-show="form.contactName.$invalid"> Enter valid name</span>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end of 1st column (usage) -->
+
+
+<div id="secondColumn"  class="span3">
+    <div class="form-horizontal">
+
+        <div class="control-group">
+            <label class="control-label"></label>
+
+            <div class="controls">
+                <span class="span6 txtCenter heightAuto">Min</span><span
+                    class="span6 txtCenter heightAuto">Max</span>
+            </div>
+        </div>
+
+        <!-- cash award balance -->
+        <div class="control-group">
+            <label class="control-label">Cash Award Bal</label>
+
+            <div class="controls">
+                <input type="text" ng-init="cab='Cash Award Bal'" ng-show="false">
+                <input type="text" id="minBalance" class="span6" ng-model="filters.cashbackBalance[0]"
+                       name="minCashAwardBalance" ng-pattern="/[0-9]+$/">
+                <input type="text" id="maxBalance" class="span6" ng-model="filters.cashbackBalance[1]"
+                       name="maxCashAwardBalance" ng-pattern="/[0-9]+$/">
+            </div>
+            <div class="controls">
+                <span ng-show="form.minCashAwardBalance.$invalid">  Enter valid min Cash Award Balance value!</span>
+                <span ng-show="form.maxCashAwardBalance.$invalid">  Enter valid max Cash Award Balance value!</span>
+                <span ng-show="cashErrorMessage">  Min value should be less than Max value</span>
+
+            </div>
+        </div>
+
+        <!-- Months until Award is due -->
+        <div class="control-group">
+            <label class="control-label">Months till Award</label>
+
+            <div class="controls">
+                <input type="text" ng-init="mta='Months till Award'" ng-show="false">
+                <input type="text" id="minMonthsAward" class="span6" ng-model="filters.monthsUntilCashAward[0]"
+                       name="minMonthsTillAward" ng-pattern="/[0-9]+$/">
+                <input type="text" id="maxMonthsAward" class="span6" ng-model="filters.monthsUntilCashAward[1]"
+                       name="maxMonthsTillAward" ng-pattern="/[0-9]+$/">
+            </div>
+            <div class="controls">
+                <span ng-show="form.minMonthsTillAward.$invalid">  Enter valid min Months Till Award value!</span>
+                <span ng-show="form.maxMonthsTillAward.$invalid">  Enter valid max Months Till Award value!</span>
+                <span ng-show="mtaErrorMessage">  Min value should be less than Max value</span>
+
+            </div>
+        </div>
+
+
+        <!-- Months account active -->
+        <div class="control-group">
+            <label class="control-label">Months Active</label>
+
+            <div class="controls">
+                <input type="text" ng-init="ma='Months Active'" ng-show="false">
+                <input type="text" id="minMonthsAc" class="span6" ng-model="filters.monthsActive[0]"
+                       name="minMonthsActive" ng-pattern="/[0-9]+$/">
+                <input type="text" id="maxMonthsAc" class="span6" ng-model="filters.monthsActive[1]"
+                       name="maxMonthsActive" ng-pattern="/[0-9]+$/">
+            </div>
+            <div class="controls">
+                <span ng-show="form.minMonthsActive.$invalid">  Enter valid min Months Active value!</span>
+                <span ng-show="form.maxMonthsActive.$invalid">  Enter valid max Months Active value!</span>
+                <span ng-show="maErrorMessage">  Min value should be less than Max value</span>
+            </div>
+        </div>
+
+        <!-- Months since account dropped -->
+        <div class="control-group">
+            <label class="control-label">Dropped Months</label>
+
+            <div class="controls">
+                <input type="text" ng-init="msd='Dropped Months'" ng-show="false">
+                <input type="text" id="minMonthsDrop" class="span6" ng-model="filters.monthsSinceDropped[0]"
+                       name="minMonthsSinceDropped" ng-pattern="/[0-9]+$/">
+                <input type="text" id="maxMonthsDrop" class="span6" ng-model="filters.monthsSinceDropped[1]"
+                       name="maxMonthsSinceDropped" ng-pattern="/[0-9]+$/">
+            </div>
+            <div class="controls">
+                <span ng-show="form.minMonthsSinceDropped.$invalid">  Enter valid min Months Since Dropped value!</span>
+                <span ng-show="form.maxMonthsSinceDropped.$invalid">  Enter valid max Months Since Dropped value!</span>
+                <span ng-show="dmErrorMessage">  Min value should be less than Max value</span>
+
+            </div>
+        </div>
+
+        <!-- Pricing value -->
+        <div class="control-group">
+            <label class="control-label">Pricing</label>
+
+            <div class="controls">
+                <input type="text" ng-init="price='Pricing'" ng-show="false">
+                <input type="text" id="minPrice" class="span6" ng-model="filters.pricing[0]" name="minPricing"
+                       ng-pattern="/^0|[0.]\.[0-9]+|\.[0-9]/">
+                <input type="text" id="maxPrice" class="span6" ng-model="filters.pricing[1]" name="maxPricing"
+                       ng-pattern="/^0|[0.]\.[0-9]+|\.[0-9]/">
+            </div>
+            <div class="controls">
+                <span ng-show="form.minPricing.$invalid">Enter valid min Pricing value! (between 0 and 1)</span>
+                <span ng-show="form.maxPricing.$invalid">Enter valid max Pricing value! (between 0 and 1)</span>
+                <span ng-show="pricingErrorMessage">Min value should be less than Max value</span>
+
+            </div>
+        </div>
+
+
+
+        <!-- Service end date -->
+        <div class="control-group">
+            <label class="control-label">Svc End Date </label>
+
+            <div class="controls">
+                <input type="text" ng-init="svc='Svc End Date'" ng-show="false">
+
+                <!-- Minimum service end date box & picker, do not bind the view field (date input) to the model
+                 with ng-model (such as ng-model="filters.serviceEndDate[0]") simply project from the model
+                 into the view with the {{}} value directive -->
+                <input class="span5 dateCal1" id="minSvcEndDateText" type="text"
+                       value="{{filters.serviceEndDate[0].toDate() | date:'MM-dd-yyyy' }}">
+                    <span class="add-on">
+                        <i class="icon-th" class="input-append date"
+                           id="minSvcEndDate" data-date=""
+                           data-date-format="mm-dd-yyyy"></i></span>
+
+                <!-- Maximum service end date box & picker -->
+                <input class="span5 dateCal1" id="maxSvcEndDateText" type="text"
+                       value="{{filters.serviceEndDate[1].toDate() | date:'MM-dd-yyyy' }}">
+                    <span class="add-on">
+                        <i class="icon-th" class="input-append date"
+                           id="maxSvcEndDate" data-date=""
+                           data-date-format="mm-dd-yyyy"></i></span>
+            </div>
+            <div class="control-group">
+                <!--<div class="controls">-->
+                    <!--<span>(mm-dd-yy/yyyy)</span>-->
+                <!--</div>-->
+            </div>
+            <div class="controls">
+                <span id="errMsgSvnDateText"> {{errMsgSvnDateText}}</span>
+                <span ng-show="form.minSvcEndDate.$invalid"> Enter valid min Svc End Date value!</span>
+                <span ng-show="form.maxSvcEndDate.$invalid">  Enter valid max Svc End Date value!</span>
+                <span ng-show="svcErrorMessage">  Min Date value should be less than Max Date value</span>
+
+            </div>
+        </div>
+
+        <!-- Drop Date -->
+        <div class="control-group">
+            <label class="control-label">Drop Date</label>
+
+            <div class="controls">
+
+
+                <!-- Minimum drop date box & picker -->
+                <input class="span5 dateCal1" id="minDropDateText" type="text"
+                       value="{{filters.dropStatusDate[0]['_d'] | date:'MM-dd-yyyy' }}">
+                    <span class="add-on">
+                        <i class="icon-th" class="input-append date"
+                           id="minDropDate" data-date=""
+                           data-date-format="mm-dd-yyyy"></i></span>
+
+                <!-- Maximum drop date box & picker -->
+                <input class="span5 dateCal1" id="maxDropDateText" type="text"
+                       value="{{filters.dropStatusDate[1]['_d'] | date:'MM-dd-yyyy' }}">
+                    <span class="add-on">
+                        <i class="icon-th" class="input-append date"
+                           id="maxDropDate" data-date=""
+                           data-date-format="mm-dd-yyyy"></i></span>
+
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <span class="dateFormat1">(mm-dd-yy/yyyy)</span>
+                </div>
+            </div>
+            <div class="controls">
+                <span id="errMsgDropDateText"> {{errMsgDropDateText}}</span>
+                <span ng-show="form.minDropDate.$invalid">  Enter valid min Drop Date value!</span>
+                <span ng-show="form.maxDropDate.$invalid">  Enter valid max Drop Date value!</span>
+                <span ng-show="dropDateErrorMessage">  Min value should be less than Max value</span>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<!-- end of 2nd column (numbers & dates) -->
+
+<div id="thirdColumn"  class="span1">
+    <fieldset>
+
+        <label>State</label>
+
+        <select class="span12 h150" ng-model="filters.utilityState"
+                ng-options="state.abbrev as state.abbrev for state in statesList"
+                ng-click="selectAll('state')" multiple></select>
+
+    </fieldset>
+
+
+    <!-- Account Type -->
+    <div class="control-group">
+        <label class="control-label">Account Type</label>
+
+        <div class="controls">
+            <select class="span12" ng-model="filters.accountType"
+                    ng-options="accountType as accountType for accountType in accountTypesList">
+            </select>
+        </div>
+    </div>
+
+    <!-- EP Status -->
+    <div class="control-group">
+        <label class="control-label">EP Status</label>
+
+        <div class="controls">
+            <select class="span12" ng-model="filters.dropStatusMapped"
+                    ng-options="dropType.statusName as dropType.statusName for dropType in dropTypesList">
+                <option value="" selected>All</option>
+            </select>
+        </div>
+    </div>
+
+</div>
+<!-- end of 3rd column (narrow, state etc)-->
+
+
+<div id="fourthColumn"  class="span2">
+
+    <fieldset>
+
+        <label>Utility </label>
+        <select class="span12 h150" ng-model="filters.utilityAbbr"
+                ng-options="u.utilityAbbrev as u.utility for u in filterUtilitiesList "
+                ng-click="selectAll('utility')"
+                multiple></select>
+
+    </fieldset>
+
+
+
+    <!-- commodity (gas / electric / whizbang -->
+    <div class="control-group">
+        <label class="control-label">Commodity</label>
+
+        <div class="controls">
+            <select class="span12" ng-model="filters.commodity"
+                    ng-options="commodity as commodity for commodity in commodityList">
+                <!--<option value="" selected>All</option>-->
+            </select>
+        </div>
+    </div>
+
+    <!-- work item type?  drop type?? All/Drop/Prospect/PreDrop/Pre -->
+    <div class="control-group">
+        <label class="control-label">Work Item Type</label>
+
+        <div class="controls">
+            <select class="span12" ng-model="filters.dropType"
+                    ng-options="dropType as dropType for dropType in dropTypeList">
+                <!--<option value="" selected>All</option>-->
+            </select>
+        </div>
+    </div>
+
+    <div class="control-group" style="display:none">
+        <label class="control-label">On Hold</label>
+
+        <div class="controls">
+            <select class="span12" ng-model="filters.HoldType"
+                    ng-options="HoldType as HoldType for HoldType in HoldTypesList" ng-change="selectAll('hold')">
+            </select>
+        </div>
+    </div>
+</div>
+<!-- end of 4th column (util)-->
+
+
+<div id="fifthColumn"  class="span3">
+    <div class="form-horizontal">
+        <div class="control-group">
+
+            <div class="controls">
+
+            </div>
+        </div>
+        <div class="control-group">
+            &nbsp;
+        </div>
+
+
+
+        <div class="control-group">
+            <label class="control-label">Account Number </label>
+
+            <div class="controls">
+                <input type="text" id="acNumber" class="span12" ng-model="filters.accountNumber"
+                       name="accountNumber" ng-pattern="/[0-9]+$/">
+                <span ng-show="form.accountNumber.$invalid">  Enter valid Number!</span>
+            </div>
+        </div>
+
+
+        <div class="control-group" ng-hide="checkAdmin">
+            <label class="control-label">Agent Name</label>
+
+            <div class="controls">
+                <input type="text" class="span12" ng-model="filters.dropRep"
+                       name="dropRep" ng-pattern="/[a-zA-Z]+$/">
+
+                <span ng-show="form.dropRep.$invalid"> Enter valid Agent name</span>
+            </div>
+        </div>
+
+
+        <div class="control-group">
+            <label class="control-label">Partner</label>
+
+            <div class="controls">
+                <select class="span12 h190" ng-model="filters.partner"
+                        ng-options="user.partnerName as user.partnerName for user in usersList" ng-click="selectAll('partner')"
+                        multiple></select>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<!-- end of 5th column everything else-->
+
+
+</div>
+
+<div class="form-actions" ng-controller="setMenuLinks">
+    <button type="submit" class="btn btn-primary" id="goButton"
+            ng-disabled="form.$invalid" ng-click="go()">Go
+    </button>
+    <button type="button" class="btn" ng-click="clear()">Clear</button>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp; </span>
+    <button type="button" ng-show="loadingExcelFlag" ng-disabled="form.$invalid" class="btn"
+            ng-click="exportFilterToCsv()">To Excel</button>
+
+</div>
+</form>
+<span class="downarrow"></span>
+</div>
+</div>
+<!-- debugging info -->
+<!--<span>filters.utilityState: {{filters.utilityState | json }}</span>-->
+<!--<span>filters.utilityAbbr: {{filters.utilityAbbr | json }}</span>-->
+<!--<span>gridOptions.totalServerItems: {{gridOptions.totalServerItems}}</span>-->
+<!--<span>gridOptions.multiSelect: {{gridOptions.multiSelect}}</span>-->
+<!--<span>pagingOptions: {{pagingOptions}}</span>-->
+<div id="feedData">
+    <h5>Work-Items</h5>
+
+
+
+    <!-- Work Item paging controls.  Somewhat hacky extract/transform of the grid paging footer template -->
+    <div class="well form-actions blueBorderBox noMarLeft marTop20">
+        {{test}}
+        <div id="gridTopPager" class="ngFooterPanel span12"
+             ng-class="{'ui-widget-content': jqueryUITheme, 'ui-corner-bottom': jqueryUITheme}"
+             ng-style="footerStyle()">
+            <div class="span4 ngTotalSelectContainer" >
+                <div class="ngFooterTotalItems" ng-class="{'ngNoMultiSelect': !multiSelect}" >
+                    <span class="ngLabel">
+                        {{gridOptions.$gridScope.i18n.ngTotalItemsLabel}}
+                        {{gridOptions.totalServerItems | number: 0}}</span>
+                    <span ng-show="filterText.length > 0" class="ngLabel">
+                        ({{gridOptions.$gridScope.i18n.ngShowingItemsLabel}}
+                        {{gridOptions.$gridScope.totalFilteredItemsLength()}})</span>
+                    <span class="ngLabel"
+                          ng-show="gridOptions.$gridScope.multiSelect && gridOptions.$gridScope.selectedItems.length > 0" >
+                        -- {{gridOptions.$gridScope.i18n.ngSelectedItemsLabel}}
+                        {{gridOptions.$gridScope.selectedItems.length| number: 0 }}</span>
+                </div>
+            </div>
+            <div class="span4 rstButton">
+                <button type="button" class="btn" ng-click="resetGridColumns()">Reset Grid</button>
+            </div>
+            <div class="span4 ngPagerContainer" style="float: right; margin-top: 10px; margin-left:0" ng-show="gridOptions.$gridScope.enablePaging"
+                 ng-class="{'ngNoMultiSelect': !multiSelect}">
+
+                <div style="float:right;  line-height:25px;" class="ngPagerControl" >
+                    <button class="ngPagerButton epPagerButton" ng-click="gridOptions.$gridScope.pageToFirst()"
+                            ng-disabled="cantPageBackward()" title="{{i18n.ngPagerFirstTitle}}">
+                        <div class="ngPagerFirstTriangle"><div class="ngPagerFirstBar"></div></div></button>
+                    <button class="ngPagerButton epPagerButton" ng-click="gridOptions.$gridScope.pageBackward()"
+                            ng-disabled="cantPageBackward()" title="{{i18n.ngPagerPrevTitle}}">
+                        <div class="ngPagerFirstTriangle ngPagerPrevTriangle"></div></button>
+                    <input class="ngPagerCurrent epPagerButton" type="number" style="width:50px; height: 24px; margin-top: 1px; padding: 0 4px;"
+                           ng-model="gridOptions.$gridScope.pagingOptions.currentPage"/>
+                    <button class="ngPagerButton epPagerButton" ng-click="gridOptions.$gridScope.pageForward()"
+                            ng-disabled="cantPageForward()" title="{{i18n.ngPagerNextTitle}}">
+                        <div class="ngPagerLastTriangle ngPagerNextTriangle"></div></button>
+                    <button class="ngPagerButton epPagerButton" ng-click="gridOptions.$gridScope.pageToLast()"
+                            ng-disabled="cantPageToLast()" title="{{i18n.ngPagerLastTitle}}">
+                        <div class="ngPagerLastTriangle"><div class="ngPagerLastBar"></div></div>
+                    </button>
+                </div>
+                <div style="float:right; margin-right: 8px;" class="ngRowCountPicker">
+                    <span style="float: left; margin-top: 3px;" class="ngLabel">{{gridOptions.$gridScope.i18n.ngPageSizeLabel}}</span>
+                    <select style="float: left;height: 27px; width: 100px" ng-model="gridOptions.pagingOptions.pageSize" >
+                        <option ng-repeat="size in gridOptions.pagingOptions.pageSizes">{{size}}</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Work Item Display grid using ng-grid -->
+
+        <div id="wiGrid" class="span12 gridStyle" ng-grid="gridOptions"></div>
+
+
+    </div>
+
+
+
+    <!--Temporary? see comment in app.js re: ngGridFooter2-->
+    <!--&lt;!&ndash; place it after, but use styling to move it above the grid &ndash;&gt;-->
+    <!--<div ng-grid-footer2="{id: gridOptions.gridId, scope: gridOptions.$gridScope"></div>-->
+
+    <!-- Agent & Campaign assignment controls -->
+    <div class="well span12 form-actions blueBorderBox noMarLeft marTop20 " ng-hide="checkAdmin" >
+
+        <div class="span9"  >
+            <div class="form-horizontal left">
+
+                <select class="span3" ng-model="selectedCampaign" ng-change="AgentsPop(selectedCampaign._id)"
+                        ng-options="campaign as campaign.name for campaign in activeCampsList">
+                    <option value="">---Select Campaign---</option>
+                </select>
+
+                <select ng-change="changefocus()" class="span3" ng-model="selectedAgent"
+                        ng-options="thisAgent as thisAgent.fullName for thisAgent in agentsList">
+                    <option value="">---Select Agent---</option>
+                </select>&nbsp;
+                <button type="submit" ng-click="assignWorkItem()" class="btn btn-primary">Assign To</button>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="copyLeft" ng-controller="setMenuLinks">
+        <button type="button" ng-show="loadingFlag" class="btn btn-primary" ng-click="addOrEditHold()">{{holdBktLebel}}</button>
+        <button type="button" ng-show="loadingFlag" class="btn btn-primary" ng-click="removeHold()">Remove Hold</button>
+    </div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="push"></div>
+<div id="dialog-confirm" title="Add/Edit Hold - {{userFullName}}" style="display: none;">
+    <p align="center">
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="nowrap">Reminder Date:                </td>
+            <td><input style="margin-bottom:0px;margin-top:0px;" class="span2 dateCal1" id="reminderDateText" type="text">
+                    <span class="add-on">
+                        <i class="icon-th" class="input-append date"
+                           id="reminderDate" data-date=""
+                           data-date-format="mm-dd-yyyy"></i>
+                    </span>
+
+            </td>
+        </tr>
+    <tr>
+        <td valign="top">&nbsp;</td>
+        <td valign="top"><span class="dateFormat">(mm-dd-yy/yyyy)<br/></span></td>
+    </tr>
+    <tr>
+        <td valign="top">Hold Reason:</td>
+        <td>            <select style="height:31px;" class="span2" ng-model="HoldReasonType"
+                                ng-options="HoldReasonType as HoldReasonType for HoldReasonType in HoldReasonList">
+            <option value="" selected="selected">SELECT</option></select></td>
+    </tr>
+        <tr>
+            <td valign="top">Comments:</td>
+            <td><textarea name="" id="holdComments" style="height:80px;width: 200px;" class="span11 ng-pristine ng-valid" ng-model="holdBucket.comments"></textarea></td>
+        </tr>
+
+    </table>
+    </p>
+</div>
+
+<div id="dialog-confirm-remove" title="Remove Hold - {{userFullName}}" style="display: none;">
+    <p align="center">
+        Do you really want to remove selected work item from your Hold Bucket?
+    </p>
+</div>
+<div id="dialog-confirm-check" title="Remove Hold - {{userFullName}}" style="display: none;">
+    <p align="center">
+        Selected item is not on Hold
+    </p>
+</div>
+
+
+<!--<h2>Debug Info, remove before release</h2>-->
+<!--<div>pagingOptions:  {{pagingOptions}}</div>-->

@@ -1,0 +1,75 @@
+<!-- Begin page content -->
+<div class="container-fluid"  ng-controller="setMenuLinks">
+    <ng-include src="'partials/navbar-common.html'"></ng-include>
+    <div class="row-fluid">
+        <div class="conBlock span12">
+
+            <h3>Agents</h3>
+            <table cellspacing="0" cellpadding="0" border="0" id="eplusDataTable"
+                   class="table table-striped table-bordered dataTable" aria-describedby="example_info">
+                <thead>
+                <tr role="row-fluid">
+                    <th class="right" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        aria-label="Browser: activate to sort column ascending" ng-click="dataSort('monthsSinceDropped')">Drop Days <i id="monthsSinceDropped">&nbsp;</i>
+                    </th>
+                    <th class="right" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        aria-label="Platform(s): activate to sort column ascending" ng-click="dataSort('accountNumber')">Account no.  <i  id="accountNumber">&nbsp;</i>
+                    </th>
+                    <th class="right" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        aria-label="Engine version: activate to sort column ascending" ng-click="dataSort('accountName')">Account name   <i  id="accountName">&nbsp;</i>
+                    </th>
+                    <th class="right" role="columnheader" tabindex="0" aria-controls="example" rowspan="1"
+                        colspan="1" aria-label="CSS grade: activate to sort column ascending" ng-click="dataSort('aggregatekWh')">Aggr KWH  <i  id="aggregatekWh">&nbsp;</i>
+                    </th>
+                    <th class="right" role="columnheader" tabindex="0" aria-controls="example" rowspan="1"
+                        colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" ng-click="dataSort('annualkWh')">
+                        Ann KWH  <i id="annualkWh">&nbsp;</i>
+                    </th>
+                    <th class="right" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        aria-label="Browser: activate to sort column ascending" ng-click="dataSort('utilityName')">Utility  <i  id="utilityName">&nbsp;</i>
+                    </th>
+                    <th class="right" role="columnheader" tabindex="0" aria-controls="example" rowspan="1"
+                        colspan="1" aria-label="Platform(s): activate to sort column ascending" ng-click="dataSort('cashbackBalance')">Cash Balance  <i  id="cashbackBalance">&nbsp;</i>
+                    </th>
+                    <th class="right " role="columnheader" tabindex="0" aria-controls="example" rowspan="1"
+                        colspan="1" aria-label="Engine version: activate to sort column ascending">Months till Award  <i>&nbsp;</i>
+                    </th>
+                    <th class="right " role="columnheader" tabindex="0" aria-controls="example" rowspan="1"
+                        colspan="1" aria-label="CSS grade: activate to sort column ascending">Invoices  <i>&nbsp;</i>
+                    </th>
+                    <th class="right" role="columnheader" tabindex="0" aria-controls="example" rowspan="1"
+                        colspan="1" aria-label="CSS grade: activate to sort column ascending" ng-click="dataSort('saveRate')">Last Rate  <i  id="saveRate">&nbsp;</i>
+                    </th>
+                    <th class="right" role="columnheader" tabindex="0" aria-controls="example" rowspan="1"
+                        colspan="1" aria-label="CSS grade: activate to sort column ascending" ng-click="dataSort('dropRep')">Agent   <i  id="dropRep">&nbsp;</i>
+                    </th>
+
+                </tr>
+                </thead>
+
+                <tbody role="alert" aria-live="polite" aria-relevant="all">
+                <tr ng-repeat="workItem in pagedItems[currentPage]|orderBy:predicate:reverse ">
+
+                    <td class="right ">{{workItem.monthsSinceDropped}}</td>
+                    <td class="right "><a>{{workItem.accountNumber}}</a></td>
+                    <td class="right ">{{workItem.accountName}}</td>
+                    <td class="right ">{{workItem.aggregatekWh}}</td>
+                    <td class="right ">{{workItem.annualkWh}}</td>
+                    <td class="right ">{{workItem.utilityName}}</td>
+                    <td class="right ">{{workItem.cashbackBalance}}</td>
+                    <td class="right ">{{workItem.monthsUntilCashAward}}</td>
+                    <td class="right ">{{workItem.Invoices}}</td>
+                    <td class="right ">{{workItem.saveRate}}</td>
+                    <td class="right ">{{workItem.dropRep}}</td>
+
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="push"></div>
+
+

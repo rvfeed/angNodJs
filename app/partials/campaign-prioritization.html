@@ -1,0 +1,243 @@
+<!-- Begin page content -->
+<div class="container-fluid" ng-controller="setMenuLinks">
+
+    <ng-include src="'partials/navbar-common.html'"></ng-include>
+
+
+    <div class="row-fluid">
+        <div class="conBlock span12">
+            <h3>Campaign Priority {{priorityCount}} <span ng-show='loadingFlag'>&nbsp; &nbsp; &nbsp; (Loading...)</span></h3>
+            <span ng-show='loadingFlag'>&nbsp; &nbsp; &nbsp; Load info: {{loadingStatus}} </span><div id="campDashboard">
+
+            <div id="campPriority">
+
+                <div class="span12 campDetail" >
+                    <div class="span4 " style="width: 37%">
+
+                        <table cellspacing="0" cellpadding="0" border="0" id="eplusDataTable"
+                               class="table table-striped table-bordered dataTable" aria-describedby="example_info">
+                            <thead>
+                            <tr role="row-fluid">
+                                <th class=" "  role="columnheader" tabindex="0" aria-controls="example"
+                                    rowspan="1" colspan="1">Campaign&nbsp;Name
+                                </th>
+                                <th class="right"  role="columnheader" tabindex="0" aria-controls="example"
+                                    rowspan="1" colspan="1">
+                                </th>
+                                <th class="right" role="columnheader" tabindex="0" aria-controls="example"
+                                    rowspan="1" colspan="1">Start&nbsp;Date
+                                </th>
+                                <th class="right"  role="columnheader" tabindex="0" aria-controls="example"
+                                    rowspan="1" colspan="1">End&nbsp;Date
+                                </th>
+                                <th class="center nowrap" role="columnheader" tabindex="0" aria-controls="example"
+                                    rowspan="1" colspan="1">No&nbsp;Of WorkItems
+                                </th>
+
+                            </tr>
+                            </thead>
+
+                            <tbody role="alert" aria-live="polite" aria-relevant="all" id="campaignOrder"
+                                   dnd-list="activeCampaignsList">
+                            <tr ng-repeat="campaign in activeCampaignsList" ng-click="showCampaignDetails(campaign._id)">
+                                <td class=" ">{{campaign.name}}</td>
+                                <td class="left  "><span class="tag {{campaign.status | lowercase}}">{{campaign.status}}</span></td>
+                                <td class="right nowrap">{{campaign.startDate | date:'MM-dd-yyyy'}}</td>
+                                <td class="right nowrap">{{campaign.endDate | date:'MM-dd-yyyy'}}</td>
+                                <td class="center ">{{campaign.totalWorkItems || 0}}</td>
+
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="span8 flRight" ng-show="showDetails==true" style="width: 62%">
+
+                        <div >
+                            <div class="well span12 blueBorderBox">
+                                <span ><h3>{{campaignToShow.name}} </h3></span>
+                                <div ng-show="showManualRuleTextArea"> <textarea  class="span12 readableTxtArea" rows="5" readonly
+                                                                                  ng-model="manualRule"></textarea> </div>
+
+                                <div ng-show="showVisualRuleFilterData" style="overflow:auto;border-bottom: 1px solid #CCC;" >
+                                    <table  cellspacing="0" cellpadding="0" border="0" id="eplusDataTableT"
+                                            class="table table-striped table-bordered dataTable"
+                                            aria-describedby="example_info" >
+                                        <thead>
+                                        <tr role="row-fluid">
+
+                                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="example"
+                                                rowspan="1"
+                                                colspan="1" aria-label="Browser: activate to sort column ascending">Field
+                                            </th>
+                                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="example"
+                                                rowspan="1"
+                                                colspan="1" aria-label="Platform(s): activate to sort column ascending">Operator
+                                            </th>
+                                            <th class="sorting center" role="columnheader" tabindex="0"
+                                                aria-controls="example"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Engine version: activate to sort column ascending">Value
+
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <!--{{finalFilters}}-->
+                                        <tbody role="alert" aria-live="polite" aria-relevant="all">
+
+                                        <tr class="gradeA odd selected" ng-repeat="filter in finalFilters">
+
+                                            <td class="sorting_1">{{filter.displayName}}</td>
+                                            <td class=" ">{{filter.operator}}</td>
+                                            <td class="center ">{{filter.value}}</td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div class="span12 priorityDetails">
+                                    <div class="span9">
+                                        <table cellspacing="0" cellpadding="0" border="0" class="table table-striped" id="prioritys">
+                                            <thead>
+                                            <tr role="row-fluid">
+                                                <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                                    aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"></th>
+                                                <th class="center" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="4"
+                                                    aria-label="Browser: activate to sort column ascending">Work-Items
+                                                </th>
+                                                <th class="center" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="4"
+                                                    aria-label="Platform(s): activate to sort column ascending">Associated Accounts
+                                                </th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody role="alert" aria-live="polite" aria-relevant="all">
+
+                                            <tr class="gradeA odd selected">
+                                                <td class=""></td>
+                                                <td class="right">Count </td>
+                                                <td class="right ">% Count </td>
+                                                <td class="right">MWH   </td>
+                                                <td class="right ">% MWH </td>
+
+                                                <td class="right bdrLeft">Count </td>
+                                                <td class="right ">% Count </td>
+                                                <td class="right">MWH </td>
+                                                <td class="right ">% MWH </td>
+
+                                            </tr>
+                                             <tr class="gradeA odd selected" ng-repeat="campaignpriority in campaignToShow.summary">
+                                                <td class="right">{{campaignpriority.category}}</td>
+
+                                                <td class="right">{{campaignpriority.workItems |number:0}}</td>
+                                                <td class="right ">{{campaignpriority.workItemsPercentage | number:0 }}</td>
+                                                <td class="right">{{campaignpriority.kWh / 1000 | number:0}}</td>
+                                                <td class="right ">{{campaignpriority.kWhPercentage | number:0}}</td>
+
+                                                <td class="right bdrLeft">{{campaignpriority.associatedAccounts | number:0}}</td>
+                                                <td class="right ">{{campaignpriority.associatedAccountsPercentage | number:0}}</td>
+                                                <td class="right">{{campaignpriority.associatedAccountskWh / 1000  | number:0}}</td>
+                                                <td class="right ">{{campaignpriority.associatedAccountskWhPercentage | number:0}}</td>
+
+                                            </tr>
+
+                                           <!--<tr class="gradeA even" ng-repeat="campaignpriority in campaignToShow.summary | limitTo:5 - 6">-->
+                                                <!--<td class="right">{{campaignpriority.category}}</td>-->
+
+                                                <!--<td class="right">{{campaignpriority.workItems}}</td>-->
+                                                <!--<td class="right ">{{100 | number:0  }}</td>-->
+                                                <!--<td class="right">{{campaignpriority.kWh | number:0}}</td>-->
+                                                <!--<td class="right ">{{100 | number:0}}</td>-->
+
+                                                <!--<td class="right bdrLeft"> {{campaignpriority.associatedAccounts}}</td>-->
+                                                <!--<td class="right ">{{100 | number:0}}</td>-->
+                                                <!--<td class="right"> {{campaignpriority.associatedAccountskWh | number:0}}</td>-->
+                                                <!--<td class="right "> {{100|  number:0}}</td>-->
+
+                                            <!--</tr> -->
+                                          </tbody>
+                                        </table>
+
+                                    </div>
+
+
+                                    <div class="span3">
+                                        <table cellspacing="0" cellpadding="0" border="0" id="topAgents" class="table table-striped">
+                                            <thead>
+                                            <tr role="row-fluid">
+                                                <th class="sorting_asc nowrap" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                                    aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"> Top Agents
+                                                </th>
+                                                <th class="right nowrap" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                                    aria-label="Browser: activate to sort column ascending">Saved MWH
+                                                </th>
+
+                                            </tr>
+                                            </thead>
+
+
+                                            <tbody role="alert" aria-live="polite" aria-relevant="all" >
+                                            <tr >
+                                                <td class="nowrap">{{campaignToShow.agentsList[0]._id.name|truncate}}&nbsp;</td>
+                                                <td class="right">{{campaignToShow.agentsList[0].Amount | number:0 }}&nbsp;</td>
+                                            </tr>
+                                            <tr >
+                                                <td class="nowrap">{{campaignToShow.agentsList[1]._id.name|truncate}}&nbsp;</td>
+                                                <td class="right">{{campaignToShow.agentsList[1].Amount | number:0 }}&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="nowrap">{{campaignToShow.agentsList[2]._id.name|truncate}}&nbsp;</td>
+                                                <td class="right">{{campaignToShow.agentsList[2].Amount | number:0  }}&nbsp;</td>
+                                            </tr>
+                                            <tr >
+                                                <td class="nowrap">{{campaignToShow.agentsList[3]._id.name|truncate}}&nbsp;</td>
+                                                <td class="right">{{campaignToShow.agentsList[3].Amount | number:0 }}&nbsp;</td>
+                                            </tr>
+											 <tr>
+                                                <td class="nowrap">{{campaignToShow.agentsList[4]._id.name|truncate}}&nbsp;</td>
+                                                <td class="right">{{campaignToShow.agentsList[4].Amount | number:0  }}&nbsp;</td>
+                                            </tr>
+                                            <tr >
+                                                <td class="nowrap">{{campaignToShow.agentsList[5]._id.name|truncate}}&nbsp;</td>
+                                                <td class="right">{{campaignToShow.agentsList[5].Amount | number:0 }}&nbsp;</td>
+                                            </tr>
+											<tr >
+                                                 <td class="nowrap">&nbsp;</td>
+                                                 <td class="right">&nbsp;</td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div align="left">
+                    <a href="/#/listCampaigns" class="btn btn-success">Back To Dashboard</a>
+                </div>
+
+            </div>
+
+
+        </div>
+        </div>
+    </div>
+</div>
+
+<div id="push">
+</div>
+
+<style type="text/css">
+    .row-fluid [class*="span"] {
+        margin-left: 7px;
+    }
+</style>
